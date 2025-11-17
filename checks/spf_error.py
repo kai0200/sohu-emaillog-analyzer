@@ -11,8 +11,10 @@ def run(text: str, sender: str, recipient: str) -> bool:
     dom = sender_domain(sender)
     if is_sohu_domain(dom):
         return False
-    if contains(text, sender) and ("spf error" in text.lower()):
-        print(f"发件人：{sender}")
-        print("结果：SPF错误")
-        return True
+    for ln in text.splitlines():
+        ll = ln.lower()
+        if (sender.lower() in ll) and ("spf error" in ll):
+            print(f"发件人：{sender}")
+            print("结果：SPF错误")
+            return True
     return False
