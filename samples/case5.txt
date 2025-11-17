@@ -1,0 +1,17 @@
+✅ 日期格式正确：20250814 
+--- 收信日志 --- 
+
+[INFO] 文件中未找到邮件地址: bongrae.seok@alvernia.edu 
+
+--- 收信过滤日志 --- 
+
+[INFO] 文件中未找到邮件地址: bongrae.seok@alvernia.edu 
+
+--- 发信日志 --- 
+
+Aug 14 15:28:18 smtp19_36_250 postfix/smtp[10377]: 4c2cKT6B6Kz4wHM: to=<bongrae.seok@alvernia.edu>, relay=alvernia-edu.mail.protection.outlook.com[52.101.8.51]:25, delay=4.4, delays=0.15/0/1.3/2.9, dsn=2.6.0, status=sent (250 2.6.0 <1755156493.eceade009aec482581b871cb53206e8e.rose1501040@sohu.com> [InternalId=211518549404365, Hostname=BY5PR03MB5093.namprd03.prod.outlook.com] 20490 bytes in 0.285, 70.094 KB/sec Queued mail for delivery) 
+
+--- 发信过滤日志 --- 
+
+Aug 14 15:28:13 proxy_18_88_88 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 68782509356745c886e4c26c0c181d46|8080|OnRcptTo|bongrae.seok@alvernia.edu 
+Aug 14 15:28:13 proxy_18_88_88 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 68782509356745c886e4c26c0c181d46|8080|OnEndHeaders|qid:4c2cKT6B6Kz4wHM|cmdfrom:rose1501040@sohu.com|msgfrom:rose1501040 <rose1501040@sohu.com>|rcpt:['bongrae.seok@alvernia.edu']|vps_ip:10.18.88.78|subject:Request for Permission to Translate Embodied Moral Psychology and#012 Confucian Philosophy|vps_port:55177|msgsender:rose1501040@sohu.com

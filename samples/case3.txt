@@ -1,0 +1,24 @@
+✅ 日期格式正确：20251103
+--- 收信日志 ---
+
+Nov  3 09:23:28 mx_36_217 postfix/smtpd[26231]: NOQUEUE: milter-reject: MAIL from unknown[114.251.93.36]:34032: 553 5.7.1 Sender ERROR:gulw@ydamc.com: http://mail.sohu.com/info/policy/10; from=<gulw@ydamc.com> proto=ESMTP helo=<mailgw.ydamc.com>
+Nov  3 09:31:58 mx_36_214 postfix/smtpd[20026]: NOQUEUE: milter-reject: MAIL from unknown[114.251.93.36]:43358: 553 5.7.1 Sender ERROR C:gulw@ydamc.com: http://mail.sohu.com/info/policy/10; from=<gulw@ydamc.com> proto=ESMTP helo=<mailgw.ydamc.com>
+Nov  3 10:47:10 mx_36_225 postfix/smtpd[6089]: NOQUEUE: milter-reject: MAIL from unknown[114.251.93.36]:59510: 553 5.7.1 Sender ERROR C:gulw@ydamc.com: http://mail.sohu.com/info/policy/10; from=<gulw@ydamc.com> proto=ESMTP helo=<mailgw.ydamc.com>
+Nov  3 10:53:47 mx_36_223 postfix/smtpd[24962]: NOQUEUE: milter-reject: MAIL from unknown[114.251.93.36]:54684: 553 5.7.1 Sender ERROR C:gulw@ydamc.com: http://mail.sohu.com/info/policy/10; from=<gulw@ydamc.com> proto=ESMTP helo=<mailgw.ydamc.com>
+Nov  3 16:05:16 mx_36_227 postfix/smtpd[17279]: NOQUEUE: milter-reject: MAIL from unknown[114.251.93.36]:50180: 553 5.7.1 Sender ERROR C:gulw@ydamc.com: http://mail.sohu.com/info/policy/10; from=<gulw@ydamc.com> proto=ESMTP helo=<mailgw.ydamc.com>
+
+--- 收信过滤日志 ---
+
+Nov  3 09:23:28 proxy_18_88_87 free_milter_server.py[line: 227] FreeMxMilter ERROR 68b16b8eb1bd415ea6e58bcb4416416e|8080|OnMailFrom|401.179075|SPF Error: client-ip=114.251.93.36; helo=mailgw.ydamc.com; envelope-from=gulw@ydamc.com; res=none;
+Nov  3 09:31:58 proxy_18_88_83 free_milter_server.py[line: 227] FreeMxMilter ERROR e2a2ccc5a1cf4bb0853127b64da55ed8|8080|OnMailFrom|8.653879|Cache SPF Error: client-ip=114.251.93.36; helo=mailgw.ydamc.com; envelope-from=gulw@ydamc.com; res=none; key=114.251.93.36ydamc.com;
+Nov  3 10:47:10 proxy_18_76_57 free_milter_server.py[line: 227] FreeMxMilter ERROR 727fe696a62445ab8e9465ff29e26d94|8080|OnMailFrom|8.509874|Cache SPF Error: client-ip=114.251.93.36; helo=mailgw.ydamc.com; envelope-from=gulw@ydamc.com; res=none; key=114.251.93.36ydamc.com;
+Nov  3 10:53:47 proxy_18_88_85 free_milter_server.py[line: 227] FreeMxMilter ERROR 4c8a7f5e60254f50a0a6b1957dab56b7|8080|OnMailFrom|9.313107|Cache SPF Error: client-ip=114.251.93.36; helo=mailgw.ydamc.com; envelope-from=gulw@ydamc.com; res=none; key=114.251.93.36ydamc.com;
+Nov  3 16:05:16 proxy_18_88_87 free_milter_server.py[line: 227] FreeMxMilter ERROR bce869246ad743a88305f81682060e5a|8080|OnMailFrom|8.905172|Cache SPF Error: client-ip=114.251.93.36; helo=mailgw.ydamc.com; envelope-from=gulw@ydamc.com; res=none; key=114.251.93.36ydamc.com;
+
+--- 发信日志 ---
+
+[INFO] 文件中未找到邮件地址: gulw@ydamc.com
+
+--- 发信过滤日志 ---
+
+[INFO] 文件中未找到邮件地址: gulw@ydamc.com

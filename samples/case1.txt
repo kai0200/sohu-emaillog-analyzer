@@ -1,0 +1,25 @@
+--- 收信日志 ---
+
+Nov 13 10:27:31 mx_36_226 postfix/smtp[26167]: 4d6PLW2BQzzDqQP: to=<tianjiazhou@sohu.com>, relay=mx197.mail.sohu.com[10.18.88.75]:25, delay=0.37, delays=0.31/0.01/0/0.05, dsn=2.0.0, status=sent (250 2.0.0 Ok: queued as 8B58512009B)
+
+--- 收信过滤日志 ---
+
+Nov 13 10:27:31 proxy_18_88_85 free_milter_server.py[line: 221] FreeMxMilter INFO 8fa1aa594e984ba098c2245cfc68db82|8080|OnRcptTo|tianjiazhou@sohu.com
+Nov 13 10:27:31 proxy_18_88_85 free_milter_server.py[line: 221] FreeMxMilter INFO 8fa1aa594e984ba098c2245cfc68db82|8080|OnEndHeaders|qid:4d6PLW2BQzzDqQP|cmdfrom:15864220066@139.com|msgfrom:=?GB2312?B?zO+809bc?= <15864220066@139.com>|rcpt:['tianjiazhou@sohu.com']|vps_ip:120.232.169.113|subject:111|vps_port:41392|msgsender:15864220066@139.com
+
+--- 发信日志 ---
+
+Nov 13 10:36:53 smtp19_36_251 postfix/smtp[18287]: 4d6PYK5LnFzHnZQ: to=<tianjiazhou@sohu.com>, relay=mx197.mail.sohu.com[10.18.88.75]:25, delay=0.2, delays=0.17/0.01/0/0.02, dsn=2.0.0, status=sent (250 2.0.0 Ok: queued as D063812009B)
+Nov 13 10:37:27 smtp19_36_241 postfix/cleanup[17273]: 4d6PYz1vT8zPjxl: message-id=<1763001447.76daeca35a0b49c190bbf4d84f3a7677.tianjiazhou@sohu.com>
+Nov 13 10:37:27 smtp19_36_241 postfix/qmgr[32594]: 4d6PYz1vT8zPjxl: from=<tianjiazhou@sohu.com>, size=4540, nrcpt=1 (queue active)
+Nov 13 11:21:43 smtp19_36_252 postfix/smtp[29468]: 4d6QY35wrsz1y63: to=<tianjiazhou@sohu.com>, relay=mx197.mail.sohu.com[10.18.88.75]:25, delay=0.17, delays=0.1/0.01/0/0.05, dsn=2.0.0, status=sent (250 2.0.0 Ok: queued as E4C2112009B)
+
+--- 发信过滤日志 ---
+
+Nov 13 10:36:53 proxy_18_88_91 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 35baeee4964f409da49dc0d1a746eb80|8080|OnRcptTo|tianjiazhou@sohu.com
+Nov 13 10:36:53 proxy_18_88_91 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 35baeee4964f409da49dc0d1a746eb80|8080|OnEndHeaders|qid:4d6PYK5LnFzHnZQ|cmdfrom:webmaster@vip.sohu.com|msgfrom:webmaster <webmaster@vip.sohu.com>|rcpt:['tianjiazhou@sohu.com']|vps_ip:10.18.88.38|subject:搜狐邮箱售后服务中心|vps_port:35358|msgsender:webmaster@vip.sohu.com
+Nov 13 10:37:27 proxy_18_88_91 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 24cceab7a43348e2863d487abab0f93b|8080|OnMailFrom|NORMAL|tianjiazhou@sohu.com|10.18.88.75
+Nov 13 10:37:27 proxy_18_88_91 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 24cceab7a43348e2863d487abab0f93b|8080|OnEndHeaders|qid:4d6PYz1vT8zPjxl|cmdfrom:tianjiazhou@sohu.com|msgfrom:tianjiazhou <tianjiazhou@sohu.com>|rcpt:['webmaster@vip.sohu.com']|vps_ip:10.18.88.75|subject:回复:搜狐邮箱售后服务中心|vps_port:56057|msgsender:tianjiazhou@sohu.com
+Nov 13 10:37:27 proxy_18_88_91 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 24cceab7a43348e2863d487abab0f93b|8080|OnEndBody|4d6PYz1vT8zPjxl|10.18.88.75|tianjiazhou@sohu.com|回复:搜狐邮箱售后服务中心|tianjiazhou|0.010000|0.011273|
+Nov 13 11:21:43 proxy_18_76_58 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 8aec33a2f65142f69c0f4fd392e7d59c|8080|OnRcptTo|tianjiazhou@sohu.com
+Nov 13 11:21:43 proxy_18_76_58 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 8aec33a2f65142f69c0f4fd392e7d59c|8080|OnEndHeaders|qid:4d6QY35wrsz1y63|cmdfrom:webmaster@vip.sohu.com|msgfrom:webmaster <webmaster@vip.sohu.com>|rcpt:['tianjiazhou@sohu.com']|vps_ip:10.18.88.38|subject:搜狐邮箱售后服务中心|vps_port:47784|msgsender:webmaster@vip.sohu.com

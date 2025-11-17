@@ -1,0 +1,17 @@
+✅ 日期格式正确：20251112
+--- 收信日志 ---
+
+[INFO] 文件中未找到邮件地址: Ylinda@vtb.ru
+
+--- 收信过滤日志 ---
+
+[INFO] 文件中未找到邮件地址: Ylinda@vtb.ru
+
+--- 发信日志 ---
+
+Nov 12 16:51:12 smtp19_36_252 postfix/smtp[9011]: 4d5xvX3PW7z1y67: to=<Ylinda@vtb.ru>, relay=mx2005.vtb.ru[195.242.83.147]:25, delay=8.2, delays=0.18/0/6.4/1.6, dsn=2.0.0, status=sent (250 2.0.0 OK)
+
+--- 发信过滤日志 ---
+
+Nov 12 16:51:04 proxy_18_76_58 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO f8c42a4130f142ffb637a842ff9bccd8|8080|OnRcptTo|ylinda@vtb.ru
+Nov 12 16:51:04 proxy_18_76_58 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO f8c42a4130f142ffb637a842ff9bccd8|8080|OnEndHeaders|qid:4d5xvX3PW7z1y67|cmdfrom:acxzy@sohu.com|msgfrom:acxzy <acxzy@sohu.com>|rcpt:['ylinda@vtb.ru']|vps_ip:10.18.88.29|subject:回复:新用户首次无法登录网银行|vps_port:52532|msgsender:acxzy@sohu.com

@@ -1,0 +1,34 @@
+✅ 日期格式正确：20250925
+--- 收信日志 ---
+
+Sep 25 19:38:43 mx_36_215 postfix/smtpd[10161]: NOQUEUE: reject: RCPT from smtp.foton.co.in[123.124.208.100]:36129: 450 4.7.1 <mailgwin.foton.com.cn>: Helo command rejected: Host not found; from=<puxiaolu@foton.com.cn> to=<lu_184@sohu.com> proto=SMTP helo=<mailgwin.foton.com.cn>
+Sep 25 19:40:49 mx_36_228 postfix/smtpd[26925]: NOQUEUE: reject: RCPT from unknown[123.124.208.100]:44326: 450 4.7.1 <mailgwin.foton.com.cn>: Helo command rejected: Host not found; from=<puxiaolu@foton.com.cn> to=<lu_184@sohu.com> proto=ESMTP helo=<mailgwin.foton.com.cn>
+Sep 25 19:46:56 mx_36_217 postfix/smtpd[21043]: NOQUEUE: reject: RCPT from unknown[123.124.208.100]:53976: 450 4.7.1 <mailgwin.foton.com.cn>: Helo command rejected: Host not found; from=<puxiaolu@foton.com.cn> to=<lu_184@sohu.com> proto=SMTP helo=<mailgwin.foton.com.cn>
+Sep 25 19:51:40 mx_36_213 postfix/smtpd[17955]: NOQUEUE: reject: RCPT from unknown[123.124.208.100]:12044: 450 4.7.1 <mailgwin.foton.com.cn>: Helo command rejected: Host not found; from=<puxiaolu@foton.com.cn> to=<lu_184@sohu.com> proto=SMTP helo=<mailgwin.foton.com.cn>
+Sep 25 19:52:02 mx_36_228 postfix/smtpd[28017]: NOQUEUE: reject: RCPT from unknown[123.124.208.100]:49896: 450 4.7.1 <mailgwin.foton.com.cn>: Helo command rejected: Host not found; from=<puxiaolu@foton.com.cn> to=<lu_184@sohu.com> proto=SMTP helo=<mailgwin.foton.com.cn>
+Sep 25 19:53:46 mx_32_176 postfix/smtpd[45022]: NOQUEUE: reject: RCPT from unknown[123.124.208.100]:20705: 450 4.7.1 <mailgwin.foton.com.cn>: Helo command rejected: Host not found; from=<puxiaolu@foton.com.cn> to=<lu_184@sohu.com> proto=ESMTP helo=<mailgwin.foton.com.cn>
+Sep 25 19:54:12 mx_32_182 postfix/smtpd[42673]: NOQUEUE: reject: RCPT from unknown[123.124.208.100]:46967: 450 4.7.1 <mailgwin.foton.com.cn>: Helo command rejected: Host not found; from=<oton.com.cn> to=<lu_184@sohu.com> proto=ESMTP helo=<mailgwin.foton.com.cn>
+Sep 25 19:59:52 mx_36_226 postfix/smtpd[14956]: NOQUEUE: reject: RCPT from unknown[123.124.208.100]:44452: 450 4.7.1 <mailgwin.foton.com.cn>: Helo command rejected: Host not found; from=<puxiaolu@foton.com.cn> to=<lu_184@sohu.com> proto=SMTP helo=<mailgwin.foton.com.cn>
+Sep 25 20:00:12 mx_36_228 postfix/smtpd[28015]: NOQUEUE: reject: RCPT from unknown[123.124.208.100]:42065: 450 4.7.1 <mailgwin.foton.com.cn>: Helo command rejected: Host not found; from=<puxiaolu@foton.com.cn> to=<lu_184@sohu.com> proto=SMTP helo=<mailgwin.foton.com.cn>
+
+--- 收信过滤日志 ---
+
+Sep 25 19:38:43 proxy_18_76_57 free_milter_server.py[line: 221] FreeMxMilter INFO a37d05bbdf9d4117bc5ce9931088e1d2|8080|OnMailFrom|387.655020|SPF Pass: client-ip=123.124.208.100; helo=mailgwin.foton.com.cn; envelope-from=puxiaolu@foton.com.cn; res=pass;
+Sep 25 19:38:43 proxy_18_76_57 free_milter_server.py[line: 221] FreeMxMilter INFO a37d05bbdf9d4117bc5ce9931088e1d2|8080|OnMailFrom|NORMAL|puxiaolu@foton.com.cn|123.124.208.100
+Sep 25 19:40:49 proxy_18_88_85 free_milter_server.py[line: 221] FreeMxMilter INFO 60810f7b578a47b98d296ab013988d6c|8080|OnMailFrom|10.972023|Cache SPF Pass: client-ip=123.124.208.100; helo=mailgwin.foton.com.cn; envelope-from=puxiaolu@foton.com.cn; res=pass; key=123.124.208.100foton.com.cn;
+Sep 25 19:40:49 proxy_18_88_85 free_milter_server.py[line: 221] FreeMxMilter INFO 60810f7b578a47b98d296ab013988d6c|8080|OnMailFrom|NORMAL|puxiaolu@foton.com.cn|123.124.208.100
+Sep 25 19:46:55 proxy_18_88_83 free_milter_server.py[line: 221] FreeMxMilter INFO 9d2555d4490a48e6b7b5b815da68c490|8080|OnMailFrom|8.671045|Cache SPF Pass: client-ip=123.124.208.100; helo=mailgwin.foton.com.cn; envelope-from=puxiaolu@foton.com.cn; res=pass; key=123.124.208.100foton.com.cn;
+Sep 25 19:46:55 proxy_18_88_83 free_milter_server.py[line: 221] FreeMxMilter INFO 9d2555d4490a48e6b7b5b815da68c490|8080|OnMailFrom|NORMAL|puxiaolu@foton.com.cn|123.124.208.100
+Sep 25 19:51:40 proxy_18_88_83 free_milter_server.py[line: 221] FreeMxMilter INFO 3fdf96d0c49f4a0b8bcfe1e4cc7db42a|8080|OnMailFrom|11.526108|Cache SPF Pass: client-ip=123.124.208.100; helo=mailgwin.foton.com.cn; envelope-from=puxiaolu@foton.com.cn; res=pass; key=123.124.208.100foton.com.cn;
+Sep 25 19:51:40 proxy_18_88_83 free_milter_server.py[line: 221] FreeMxMilter INFO 3fdf96d0c49f4a0b8bcfe1e4cc7db42a|8080|OnMailFrom|NORMAL|puxiaolu@foton.com.cn|123.124.208.100
+Sep 25 19:52:01 proxy_18_88_87 free_milter_server.py[line: 221] FreeMxMilter INFO 4e248649d61b41de84c0145ac9194192|8080|OnMailFrom|11.126995|Cache SPF Pass: client-ip=123.124.208.100; helo=mailgwin.foton.com.cn; envelope-from=puxiaolu@foton.com.cn; res=pass; key=123.124.208.100foton.com.cn;
+Sep 25 19:52:01 proxy_18_88_87 free_milter_server.py[line: 221] FreeMxMilter INFO 4e248649d61b41de84c0145ac9194192|8080|OnMailFrom|NORMAL|puxiaolu@foton.com.cn|123.124.208.100
+Sep 25 19:53:46 proxy_18_88_87 free_milter_server.py[line: 221] FreeMxMilter INFO 5c44b771c1be4bc2a23c0a1ac9d00579|8080|OnMailFrom|8.111954|Cache SPF Pass: client-ip=123.124.208.100; helo=mailgwin.foton.com.cn; envelope-from=puxiaolu@foton.com.cn; res=pass; key=123.124.208.100foton.com.cn;
+--- 发信日志 ---
+
+Sep 25 20:04:34 smtp19_36_250 postfix/smtp[25410]: 4cXXSx4kcfz4wH8: to=<aolu@foton.com.cn>, relay=smtp.foton.com.cn[123.124.208.100]:25, delay=0.86, delays=0.14/0/0.69/0.03, dsn=2.0.0, status=sent (250 2.0.0 Ok: queued as 7026E1C00ABFFF)
+
+--- 发信过滤日志 ---
+
+Sep 25 20:04:33 proxy_18_88_87 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 1e992059908648fab3c39a9f756154d5|8080|OnRcptTo|puxiaolu@foton.com.cn
+Sep 25 20:04:33 proxy_18_88_87 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 1e992059908648fab3c39a9f756154d5|8080|OnEndHeaders|qid:4cXXSx4kcfz4wH8|cmdfrom:lu_184@sohu.com|msgfrom:lu_184 <lu_184@sohu.com>|rcpt:['puxiaolu@foton.com.cn']|vps_ip:10.18.88.32|subject:测试|vps_port:34396|msgsender:lu_184@sohu.com
