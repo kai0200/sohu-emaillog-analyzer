@@ -1,0 +1,18 @@
+✅ 日期格式正确：20250901
+--- 收信日志 ---
+
+--- 搜索结果 (主机: 10.18.88.48, 文件: /maildata/syslog/free_mx/20250901.log) ---
+Sep  1 14:30:31 mx_32_178 postfix/smtp[28540]: 4cFfBY5ym4z7tSH: to=<lu_184@sohu.com>, relay=mx216.mail.sohu.com[10.18.88.32]:25, delay=2, delays=2/0/0/0.01, dsn=2.0.0, status=sent (250 2.0.0 Ok: queued as 120C4420128)
+--- 收信过滤日志 ---
+
+--- 搜索结果 (主机: 10.18.88.19, 文件: /maildata/syslog/FreeMxMilter/20250901.log) ---
+Sep  1 14:30:29 proxy_18_88_90 free_milter_server.py[line: 221] FreeMxMilter INFO 831b67b17ec547a5a6e3814e488b7efc|8080|OnRcptTo|lu_184@sohu.com
+Sep  1 14:30:30 proxy_18_88_90 free_milter_server.py[line: 221] FreeMxMilter INFO 831b67b17ec547a5a6e3814e488b7efc|8080|OnEndHeaders|qid:4cFfBY5ym4z7tSH|cmdfrom:bounce+5f371a.4d1858-lu_184=sohu.com@mg2.substack.com|msgfrom:"The Chain (GSCC)" <gscc@substack.com>|rcpt:['lu_184@sohu.com']|vps_ip:159.112.244.18|subject:Leading Through Complexity: An Interview with Hanno Bruemmer|vps_port:36530|msgsender:gscc@substack.com
+--- 发信日志 ---
+
+--- 搜索结果 (主机: 10.18.88.48, 文件: /maildata/syslog/free_smtp/20250901.log) ---
+[INFO] 文件中未找到邮件地址: lu_184@sohu.com
+--- 发信过滤日志 ---
+
+--- 搜索结果 (主机: 10.18.88.19, 文件: /maildata/syslog/FreeMailMilter/20250901.log) ---
+[INFO] 文件中未找到邮件地址: lu_184@sohu.com

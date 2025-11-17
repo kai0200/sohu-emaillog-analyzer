@@ -10,15 +10,14 @@ def extract_time(line: str) -> str:
 
 def run(text: str, sender: str, recipient: str) -> bool:
     lines = text.splitlines()
+    tl = text.lower()
     s = sender.lower()
     r = recipient.lower()
-    has_cmdfrom = any("cmdfrom:" + s in ln.lower() for ln in lines)
-    has_rcpt = any("rcpt:['" + r + "']" in ln.lower() for ln in lines)
-    if not (has_cmdfrom and has_rcpt):
+    if not (s in tl and r in tl):
         return False
     for ln in lines:
         ll = ln.lower()
-        if ("postfix/smtp" in ll and f"to=<{r}>" in ll and "status=sent" in ll and "(250" in ln):
+        if ("postfix/smtp" in ll and "status=sent" in ll and "(250" in ln):
             t = extract_time(ln)
             status = extract_status(ln)
             print(f"发信时间：{t}")
