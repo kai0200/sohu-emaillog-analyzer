@@ -42,3 +42,23 @@ helo=<mailgwin.foton.com.cn>
 status：250 2.0.0 OK
 发件人：gulw@ydamc.com
 结果：SPF错误
+
+
+新增模式
+
+- 支持位置参数： python3 analyze_logs.py <LOG_FILE> <SENDER> <RECIPIENT>
+- 保留原有可选参数： python3 analyze_logs.py --log <LOG_FILE> --sender <SENDER> --recipient <RECIPIENT>
+实现说明
+
+- 参数解析增加位置参数收集，长度为 3 时优先生效
+- 若位置参数未提供，则回退至原有 --log/--sender/--recipient 解析
+- 任一参数缺失时输出简要用法并退出
+变更位置
+
+- 参数解析与分派： analyze_logs.py:14-33
+- 检查调用沿用同一变量： analyze_logs.py:25-33
+验证
+
+- 语法检查通过： python3 -m py_compile analyze_logs.py
+- 适配你示例： python3 analyze_logs.py samples/case4.txt puxiaolu@foton.com.cn lu_184@sohu.com
+如需在用法提示中加入更详细示例或支持短参数别名（如 -l/-s/-r ），可以继续扩展解析。

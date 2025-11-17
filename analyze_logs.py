@@ -13,22 +13,32 @@ def read_text(path: Path) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--log", default="user_log.txt")
-    ap.add_argument("--sender", required=True)
-    ap.add_argument("--recipient", required=True)
+    ap.add_argument("-l", "--log", default="user_log.txt")
+    ap.add_argument("-s", "--sender")
+    ap.add_argument("-r", "--recipient")
+    ap.add_argument("positional", nargs="*")
     args = ap.parse_args()
-    p = Path(args.log)
+    if len(args.positional) == 3:
+        log, sender, recipient = args.positional
+    else:
+        log = args.log
+        sender = args.sender
+        recipient = args.recipient
+    if not (log and sender and recipient):
+        print("用法: python3 analyze_logs.py <LOG_FILE> <SENDER> <RECIPIENT> 或使用 --log --sender --recipient")
+        return
+    p = Path(log)
     txt = read_text(p)
     if not txt:
         print("[ERROR] 无法读取日志文件")
         return
-    if check_250_success(txt, args.sender, args.recipient):
+    if check_250_success(txt, sender, recipient):
         return
-    if check_spf_error(txt, args.sender, args.recipient):
+    if check_spf_error(txt, sender, recipient):
         return
-    if check_helo_error(txt, args.sender, args.recipient):
+    if check_helo_error(txt, sender, recipient):
         return
-    if check_no_related(txt, args.sender, args.recipient):
+    if check_no_related(txt, sender, recipient):
         return
     print("[INFO] 未匹配到已知检查")
 
