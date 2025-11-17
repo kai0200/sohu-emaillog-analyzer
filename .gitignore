@@ -1,0 +1,8 @@
+.venv/
+.git/
+.idea/
+samples/*
+
+*.log
+*.pyc
+

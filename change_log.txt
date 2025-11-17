@@ -1,0 +1,24 @@
+调用顺序
+
+- 250送达 → SPF错误 → HELO错误 → 无相关日志
+- 这样可避免“无相关日志”抢先命中而屏蔽更具体的结论（如 SPF、HELO）
+运行示例
+
+- PowerShell 下建议使用 Python Launcher： py -3
+- 无相关日志：
+  - py -3 analyze_logs.py --log samples/case1.txt --sender '@twitter.com' --recipient 'tianjiazhou@sohu.com' --date 20251113
+- 250送达：
+  - py -3 analyze_logs.py --log samples/case2.txt --sender acxzy@sohu.com --recipient Ylinda@vtb.ru --date 20251112
+- SPF错误：
+  - py -3 analyze_logs.py --log samples/case3.txt --sender gulw@ydamc.com --recipient 18655335713@sohu.com --date 20251103
+- HELO错误：
+  - py -3 analyze_logs.py --log samples/case4.txt --sender puxiaolu@foton.com.cn --recipient lu_184@sohu.com --date 20250925
+文件位置
+
+- 模块文件： checks/*.py
+- 主程序： analyze_logs.py
+- 示例日志： samples/case*.txt
+扩展建议
+
+- 为每个模块提供统一接口 run(text, sender, recipient) -> bool （已实现），后续新增检查只需添加新文件并在主程序中引入
+- 若后续检查共享工具函数，可再抽取 checks/common.py 以减少重复逻辑
