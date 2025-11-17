@@ -14,7 +14,7 @@ def read_text(path: Path) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("-l", "--log", default="user_log.txt")
+    ap.add_argument("-l", "--log", default="/tmp/a.log")
     ap.add_argument("-s", "--sender")
     ap.add_argument("-r", "--recipient")
     ap.add_argument("positional", nargs="*")
