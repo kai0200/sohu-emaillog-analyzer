@@ -1,0 +1,91 @@
+#!/bin/bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# 脚本名称: remote_mail_grep.sh
+# 功能: 通过 SSH 连接到远程主机，在指定文件中查找一个邮件地址。
+# 使用方法: ./remote_mail_grep.sh <USERNAME> <HOSTNAME_OR_IP> <FILE_PATH>
+
+if [ "$#" -ne 2 ]; then
+    echo "使用错误：需要二个参数。"
+    echo "用法: $0 <EMAIL_ADDRESS> <LOG_DATE>"
+    echo "示例: $0 user@example.com 20251013"
+    exit 1
+fi
+
+REMOTE_USER="${REMOTE_USER:-root}"
+EMAIL_ADDRESS="$1"
+SYSLOG_DATE="$2"
+HOST_FREE="10.18.88.48"
+HOST_CORP="10.18.88.19"
+FILE_FREE_MX="/maildata/syslog/free_mx/${SYSLOG_DATE}.log"
+FILE_FREE_SMTP="/maildata/syslog/free_smtp/${SYSLOG_DATE}.log"
+FILE_CORP_MX="/maildata/syslog/FreeMxMilter/${SYSLOG_DATE}.log"
+FILE_CORP_SMTP="/maildata/syslog/FreeMailMilter/${SYSLOG_DATE}.log"
+
+if [ -z "$EMAIL_ADDRESS" ]; then
+    echo "错误：邮件地址不能为空。"
+    exit 1
+fi
+
+validate_date() {
+    local s="$1"
+    if [[ ! "$s" =~ ^[0-9]{8}$ ]]; then
+        echo "❌ 错误：日期格式不正确，应为YYYYMMDD（例如：20251112）"
+        exit 1
+    fi
+    local year=${s:0:4}
+    local month=${s:4:2}
+    local day=${s:6:2}
+    if ((10#$year < 1970 || 10#$year > 2100)); then
+        echo "❌ 错误：年份($year)不合法"
+        exit 1
+    fi
+    if ((10#$month < 1 || 10#$month > 12)); then
+        echo "❌ 错误：月份($month)不合法"
+        exit 1
+    fi
+    if ! date -d "${year}-${month}-${day}" "+%Y%m%d" >/dev/null 2>&1; then
+        echo "❌ 错误：日期($s)不合法"
+        exit 1
+    fi
+    echo "✅ 日期格式正确：$s"
+}
+
+execute_remote_grep() {
+    local REMOTE_HOST="$1"
+    local REMOTE_FILE="$2"
+    if [ -z "$REMOTE_USER" ] || [ -z "$EMAIL_ADDRESS" ]; then
+        echo "[FATAL] 内部错误：函数所需的全局变量 (REMOTE_USER 或 EMAIL_ADDRESS) 未定义。" >&2
+        return 1
+    fi
+    local SSH_COMMAND="
+if [ -f \"${REMOTE_FILE}\" ]; then
+  echo \"--- 搜索结果 (主机: ${REMOTE_HOST}, 文件: ${REMOTE_FILE}) ---\"
+  grep -i -F \"${EMAIL_ADDRESS}\" \"${REMOTE_FILE}\"
+  if [ \$? -ne 0 ]; then
+    echo \"[INFO] 文件中未找到邮件地址: ${EMAIL_ADDRESS}\"
+  fi
+else
+  echo \"[ERROR] 远程文件不存在或不是普通文件: ${REMOTE_FILE}\"
+  exit 1
+fi
+"
+    echo ""
+    ssh "${REMOTE_USER}@${REMOTE_HOST}" "${SSH_COMMAND}"
+}
+
+validate_date "$SYSLOG_DATE"
+
+STATUS=0
+echo "--- 收信日志 ---"
+execute_remote_grep  "${HOST_FREE}" "${FILE_FREE_MX}" || STATUS=1
+echo "--- 收信过滤日志 ---"
+execute_remote_grep  "${HOST_CORP}" "${FILE_CORP_MX}" || STATUS=1
+echo "--- 发信日志 ---"
+execute_remote_grep  "${HOST_FREE}" "${FILE_FREE_SMTP}" || STATUS=1
+echo "--- 发信过滤日志 ---"
+execute_remote_grep  "${HOST_CORP}" "${FILE_CORP_SMTP}" || STATUS=1
+
+exit $STATUS
