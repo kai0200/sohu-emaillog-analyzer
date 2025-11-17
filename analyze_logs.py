@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import argparse
 from pathlib import Path
 from checks.no_related import run as check_no_related
