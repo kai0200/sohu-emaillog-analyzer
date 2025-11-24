@@ -1,18 +1,20 @@
-✅ 日期格式正确：20250901
---- 收信日志 ---
-
---- 搜索结果 (主机: 10.18.88.48, 文件: /maildata/syslog/free_mx/20250901.log) ---
-Sep  1 14:30:31 mx_32_178 postfix/smtp[28540]: 4cFfBY5ym4z7tSH: to=<lu_184@sohu.com>, relay=mx216.mail.sohu.com[10.18.88.32]:25, delay=2, delays=2/0/0/0.01, dsn=2.0.0, status=sent (250 2.0.0 Ok: queued as 120C4420128)
---- 收信过滤日志 ---
-
---- 搜索结果 (主机: 10.18.88.19, 文件: /maildata/syslog/FreeMxMilter/20250901.log) ---
-Sep  1 14:30:29 proxy_18_88_90 free_milter_server.py[line: 221] FreeMxMilter INFO 831b67b17ec547a5a6e3814e488b7efc|8080|OnRcptTo|lu_184@sohu.com
-Sep  1 14:30:30 proxy_18_88_90 free_milter_server.py[line: 221] FreeMxMilter INFO 831b67b17ec547a5a6e3814e488b7efc|8080|OnEndHeaders|qid:4cFfBY5ym4z7tSH|cmdfrom:bounce+5f371a.4d1858-lu_184=sohu.com@mg2.substack.com|msgfrom:"The Chain (GSCC)" <gscc@substack.com>|rcpt:['lu_184@sohu.com']|vps_ip:159.112.244.18|subject:Leading Through Complexity: An Interview with Hanno Bruemmer|vps_port:36530|msgsender:gscc@substack.com
+✅ 日期格式正确：20251121
 --- 发信日志 ---
 
---- 搜索结果 (主机: 10.18.88.48, 文件: /maildata/syslog/free_smtp/20250901.log) ---
-[INFO] 文件中未找到邮件地址: lu_184@sohu.com
+--- 搜索结果 (主机: 10.18.88.48, 文件: /maildata/syslog/free_smtp/20251121.log) ---
+Nov 21 17:33:47 smtp19_36_240 postfix/cleanup[22734]: 4dCVQg6pJbz1y5s: message-id=<1763717627.756590b63cfe407a89eff267032a136a.benyzy@sohu.com>
+Nov 21 17:33:48 smtp19_36_240 postfix/qmgr[27315]: 4dCVQg6pJbz1y5s: from=<benyzy@sohu.com>, size=1084, nrcpt=1 (queue active)
+Nov 21 17:52:45 smtp19_36_240 postfix/smtp[23217]: 4dCVrY5Xc2z1xv3: to=<benyzy@sohu.com>, relay=mx301.mail.sohu.com[10.18.88.93]:25, delay=0.13, delays=0.1/0.01/0.01/0.01, dsn=2.0.0, status=sent (250 2.0.0 Ok: queued as D9C5A221ECA)
+Nov 21 17:53:32 smtp19_36_251 postfix/cleanup[21517]: 4dCVsS0ZPgzHnZQ: message-id=<1763718811.9db321db6ea0452a8114f19ffbc5c228.benyzy@sohu.com>
+Nov 21 17:53:32 smtp19_36_251 postfix/qmgr[25698]: 4dCVsS0ZPgzHnZQ: from=<benyzy@sohu.com>, size=142178, nrcpt=1 (queue active)
 --- 发信过滤日志 ---
 
---- 搜索结果 (主机: 10.18.88.19, 文件: /maildata/syslog/FreeMailMilter/20250901.log) ---
-[INFO] 文件中未找到邮件地址: lu_184@sohu.com
+--- 搜索结果 (主机: 10.18.88.19, 文件: /maildata/syslog/FreeMailMilter/20251121.log) ---
+Nov 21 17:33:47 proxy_18_76_58 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 6a9a0d60da27469899a263cce6fb47df|8080|OnMailFrom|NORMAL|benyzy@sohu.com|10.18.88.93
+Nov 21 17:33:47 proxy_18_76_58 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 6a9a0d60da27469899a263cce6fb47df|8080|OnEndHeaders|qid:4dCVQg6pJbz1y5s|cmdfrom:benyzy@sohu.com|msgfrom:benyzy <benyzy@sohu.com>|rcpt:['yanzhiyong@yadingdata.com']|vps_ip:10.18.88.93|subject:|vps_port:41590|msgsender:benyzy@sohu.com
+Nov 21 17:33:47 proxy_18_76_58 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 6a9a0d60da27469899a263cce6fb47df|8080|OnEndBody|4dCVQg6pJbz1y5s|10.18.88.93|benyzy@sohu.com||benyzy|0.010000|0.003466|
+Nov 21 17:52:45 proxy_18_88_88 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 8970a0791de544cda5e9e40782b6f041|8080|OnRcptTo|benyzy@sohu.com
+Nov 21 17:52:45 proxy_18_88_88 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 8970a0791de544cda5e9e40782b6f041|8080|OnEndHeaders|qid:4dCVrY5Xc2z1xv3|cmdfrom:webmaster@vip.sohu.com|msgfrom:webmaster <webmaster@vip.sohu.com>|rcpt:['benyzy@sohu.com']|vps_ip:10.18.88.38|subject:搜狐邮箱售后服务中心|vps_port:47086|msgsender:webmaster@vip.sohu.com
+Nov 21 17:53:32 proxy_18_76_58 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO e9744ee284a745fc972a186822b9140e|8080|OnMailFrom|NORMAL|benyzy@sohu.com|10.18.88.93
+Nov 21 17:53:32 proxy_18_76_58 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO e9744ee284a745fc972a186822b9140e|8080|OnEndHeaders|qid:4dCVsS0ZPgzHnZQ|cmdfrom:benyzy@sohu.com|msgfrom:benyzy <benyzy@sohu.com>|rcpt:['webmaster@vip.sohu.com']|vps_ip:10.18.88.93|subject:回复:搜狐邮箱售后服务中心|vps_port:45708|msgsender:benyzy@sohu.com
+Nov 21 17:53:32 proxy_18_76_58 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO e9744ee284a745fc972a186822b9140e|8080|OnEndBody|4dCVsS0ZPgzHnZQ|10.18.88.93|benyzy@sohu.com|回复:搜狐邮箱售后服务中心|benyzy|0.010000|0.007716|

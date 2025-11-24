@@ -33,15 +33,15 @@ def main():
     if not txt:
         print("[ERROR] 无法读取日志文件")
         return
-    if check_250_success(txt, sender, recipient):
-        return
     if check_spf_error(txt, sender, recipient):
         return
     if check_helo_error(txt, sender, recipient):
         return
     if check_no_related(txt, sender, recipient):
         return
-    print("[INFO] 未匹配到已知检查")
+    if check_250_success(txt, sender, recipient):
+        return
+    #print("[INFO] 未匹配到已知检查")
 
 if __name__ == "__main__":
     main()

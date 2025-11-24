@@ -5,14 +5,19 @@
 运行示例
 
 - 无相关日志：
-  - python3 analyze_logs.py --log samples/case1.txt --sender '@twitter.com' --recipient 'tianjiazhou@sohu.com'
+  """ python3 analyze_logs.py --log samples/case1.txt --sender '@twitter.com' --recipient 'tianjiazhou@sohu.com' """
 - 250送达：
-  - python3 analyze_logs.py --log samples/case2.txt --sender acxzy@sohu.com --recipient Ylinda@vtb.ru
-  - python3 analyze_logs.py --log samples/case6.txt --sender lu_184@sohu.com --recipient gscc@substack.com
+  """ python3 analyze_logs.py --log samples/case2.txt --sender acxzy@sohu.com --recipient Ylinda@vtb.ru      """
+  """ python3 analyze_logs.py --log samples/case6.txt --sender lu_184@sohu.com --recipient gscc@substack.com """
 - SPF错误：
-  - python3 analyze_logs.py --log samples/case3.txt --sender gulw@ydamc.com --recipient 18655335713@sohu.com
+  """ python3 analyze_logs.py --log samples/case3.txt --sender gulw@ydamc.com --recipient 18655335713@sohu.com """
 - HELO错误：
-  - python3 analyze_logs.py --log samples/case4.txt --sender puxiaolu@foton.com.cn --recipient lu_184@sohu.com
+  """ python3 analyze_logs.py --log samples/case4.txt --sender puxiaolu@foton.com.cn --recipient lu_184@sohu.com """
+- 无相关日志
+  """python3 analyze_logs.py -l samples/case5.txt -s seller-notification@amazon.co.uk -r yangcaiyunyun@sohu.com """
+- 测试log无250，但是有过滤日志，认为邮件发送可能成功
+  """python3 analyze_logs.py -l samples/case6.txt -s benyzy@sohu.com  -r yanzhiyong@yadingdata.com"""
+
 
 
 文件位置
@@ -62,3 +67,11 @@ status：250 2.0.0 OK
 - 语法检查通过： python3 -m py_compile analyze_logs.py
 - 适配你示例： python3 analyze_logs.py samples/case4.txt puxiaolu@foton.com.cn lu_184@sohu.com
 如需在用法提示中加入更详细示例或支持短参数别名（如 -l/-s/-r ），可以继续扩展解析。
+
+20251124 增加sent_250.py模块，支持发信日志表格输出
+发信日志表格输出
+python3 analyze_logs.py -l samples/case1.txt  -s webmaster@vip.sohu.com -r tianjiazhou@sohu.com
+- 时间 | QID | 发件人信息 | 收件人信息 | 主题
+- 11月13日 10:36:53 | 4d6PYK5LnFzHnZQ | webmaster <webmaster@vip.sohu.com> | tianjiazhou@sohu.com | 搜狐邮箱售后服务中心
+- 11月13日 10:37:27 | 4d6PYz1vT8zPjxl | tianjiazhou@sohu.com | webmaster@vip.sohu.com | 回复:搜狐邮箱售后服务中心
+- 11月13日 11:21:43 | 4d6QY35wrsz1y63 | tianjiazhou@sohu.com | webmaster@vip.sohu.com | 搜狐邮箱售后服务中心

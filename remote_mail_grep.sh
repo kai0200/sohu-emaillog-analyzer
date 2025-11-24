@@ -53,6 +53,16 @@ validate_date() {
     echo "✅ 日期格式正确：$s"
 }
 
+is_sohu_email() {
+    local email="$1"
+    # 检查邮件地址是否包含 sohu.com 或 vip.sohu.com
+    if [[ "$email" == *"@sohu.com"* ]] || [[ "$email" == *"@vip.sohu.com"* ]]; then
+        return 0  # true
+    else
+        return 1  # false
+    fi
+}
+
 execute_remote_grep() {
     local REMOTE_HOST="$1"
     local REMOTE_FILE="$2"
@@ -65,10 +75,10 @@ if [ -f \"${REMOTE_FILE}\" ]; then
   echo \"--- 搜索结果 (主机: ${REMOTE_HOST}, 文件: ${REMOTE_FILE}) ---\"
   grep -i -F \"${EMAIL_ADDRESS}\" \"${REMOTE_FILE}\"
   if [ \$? -ne 0 ]; then
-    echo \"[INFO] 文件中未找到邮件地址: ${EMAIL_ADDRESS}\"
+    echo \"[INFO]无相关记录，联系发件地址管理员确认: ${EMAIL_ADDRESS}\"
   fi
 else
-  echo \"[ERROR] 远程文件不存在或不是普通文件: ${REMOTE_FILE}\"
+  echo \"[ERROR] 日志文件不存在，检查日期是否写错: ${REMOTE_FILE}\"
   exit 1
 fi
 "
@@ -79,13 +89,20 @@ fi
 validate_date "$SYSLOG_DATE"
 
 STATUS=0
-echo "--- 收信日志 ---"
-execute_remote_grep  "${HOST_FREE}" "${FILE_FREE_MX}" || STATUS=1
-echo "--- 收信过滤日志 ---"
-execute_remote_grep  "${HOST_CORP}" "${FILE_CORP_MX}" || STATUS=1
-echo "--- 发信日志 ---"
-execute_remote_grep  "${HOST_FREE}" "${FILE_FREE_SMTP}" || STATUS=1
-echo "--- 发信过滤日志 ---"
-execute_remote_grep  "${HOST_CORP}" "${FILE_CORP_SMTP}" || STATUS=1
+
+# 根据邮件地址域名决定查询哪些日志
+if is_sohu_email "$EMAIL_ADDRESS"; then
+    # 如果是 sohu.com 或 vip.sohu.com，只查询发信相关日志
+    echo "--- 发信日志 ---"
+    execute_remote_grep  "${HOST_FREE}" "${FILE_FREE_SMTP}" || STATUS=1
+    echo "--- 发信过滤日志 ---"
+    execute_remote_grep  "${HOST_CORP}" "${FILE_CORP_SMTP}" || STATUS=1
+else
+    # 否则，只查询收信相关日志
+    echo "--- 收信日志 ---"
+    execute_remote_grep  "${HOST_FREE}" "${FILE_FREE_MX}" || STATUS=1
+    echo "--- 收信过滤日志 ---"
+    execute_remote_grep  "${HOST_CORP}" "${FILE_CORP_MX}" || STATUS=1
+fi
 
 exit $STATUS

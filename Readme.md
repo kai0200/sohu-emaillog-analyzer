@@ -184,4 +184,9 @@ Sep 25 20:04:33 proxy_18_88_87 free_milter_server.py[line: 221] FreeMailMilterSm
 Sep 25 20:04:33 proxy_18_88_87 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 1e992059908648fab3c39a9f756154d5|8080|OnEndHeaders|qid:4cXXSx4kcfz4wH8|cmdfrom:lu_184@sohu.com|msgfrom:lu_184 <lu_184@sohu.com>|rcpt:['puxiaolu@foton.com.cn']|vps_ip:10.18.88.32|subject:测试|vps_port:34396|msgsender:lu_184@sohu.com
 ```
 
+### 5. shell日志
 
+```shell
+./remote_mail_grep.sh $email_date $email_address| tee >> /tmp/a.log
+
+```
