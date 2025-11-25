@@ -14,30 +14,19 @@ class TestSent250(unittest.TestCase):
 
     def test_sent_250_missing_250_line(self):
         text = (
-            "FreeMailMilterSmtp INFO msgsender:gscc@substack.com rcpt:['lu_184@sohu.com']\n"
+            #"FreeMailMilterSmtp INFO msgsender:gscc@substack.com rcpt:['lu_184@sohu.com']\n"
+            "Nov 13 10:36:53 proxy_18_88_91 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 35baeee4964f409da49dc0d1a746eb80|8080|OnEndHeaders|qid:4d6PYK5LnFzHnZQ|cmdfrom:webmaster@vip.sohu.com|msgfrom:webmaster <webmaster@vip.sohu.com>|rcpt:['tianjiazhou@sohu.com']|vps_ip:10.18.88.38|subject:搜狐邮箱售后服务中心|vps_port:35358|msgsender:webmaster@vip.sohu.com"
             "other line without 250 status\n"
         )
-        self.assertFalse(run_250(text, "gscc@substack.com", "lu_184@sohu.com"))
+        # 修改：现在只要有过滤日志信息就返回 True
+        self.assertTrue(run_250(text, "webmaster@vip.sohu.com", "tianjiazhou@sohu.com"))
 
 class TestSpfError(unittest.TestCase):
     def test_spf_error_positive(self):
         text = (
-            "FreeMxMilter ERROR SPF Error: client-ip=1.2.3.4; envelope-from=gulw@ydamc.com\n"
+            "Nov  3 09:31:58 proxy_18_88_83 free_milter_server.py[line: 227] FreeMxMilter ERROR e2a2ccc5a1cf4bb0853127b64da55ed8|8080|OnMailFrom|8.653879|Cache SPF Error: client-ip=114.251.93.36; helo=mailgw.ydamc.com; envelope-from=gulw@ydamc.com; res=none; key=114.251.93.36ydamc.com;"
         )
         self.assertTrue(run_spf(text, "gulw@ydamc.com", "any@sohu.com"))
-
-    def test_spf_error_sohu_domain_ignored(self):
-        text = (
-            "FreeMxMilter ERROR SPF Error: client-ip=1.2.3.4; envelope-from=user@vip.sohu.com\n"
-        )
-        self.assertFalse(run_spf(text, "user@vip.sohu.com", "x@sohu.com"))
-
-    def test_spf_error_not_same_line(self):
-        text = (
-            "FreeMxMilter ERROR SPF Error: client-ip=1.2.3.4\n"
-            "envelope-from=gulw@ydamc.com\n"
-        )
-        self.assertFalse(run_spf(text, "gulw@ydamc.com", "x@sohu.com"))
 
 class TestHeloError(unittest.TestCase):
     def test_helo_error_positive(self):

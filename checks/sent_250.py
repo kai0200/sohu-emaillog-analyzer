@@ -93,7 +93,7 @@ def run(text: str, sender: str, recipient: str) -> bool:
         # 检查是否同时包含 msgsender:发件人 和 rcpt列表中包含收件人，认为邮件发送可能成功
         if f"msgsender:{sender}" in ln and f"'{recipient}'" in ln and "rcpt:[" in ln:
             t = extract_time(ln)
-            status = "可能成功（基于过滤日志判断）"
+            status = "成功（基于过滤日志判断）查看用户目录，或联系收件人确认"
             print(f"发信时间：{t}")
             print(f"发件人：{sender}")
             print(f"收件人：{recipient}")

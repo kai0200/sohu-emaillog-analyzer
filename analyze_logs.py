@@ -31,7 +31,7 @@ def main():
     p = Path(log)
     txt = read_text(p)
     if not txt:
-        print("[ERROR] 无法读取日志文件")
+        print("[ERROR] 没有相关日志文件")
         return
     if check_spf_error(txt, sender, recipient):
         return
