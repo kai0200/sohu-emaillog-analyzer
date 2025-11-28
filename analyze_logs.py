@@ -2,8 +2,6 @@
 """
 Entrypoint for running log checks on a combined log file.
 """
-from __future__ import annotations
-
 import argparse
 from pathlib import Path
 from typing import Optional, Tuple
