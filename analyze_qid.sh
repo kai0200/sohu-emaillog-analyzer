@@ -62,7 +62,6 @@ END {
     }
     if (printed == 0) {
         print "未找到匹配的发/收件记录。" > "/dev/stderr"
-        exit 1
     }
 }
 ' "$LOG_FILE"
