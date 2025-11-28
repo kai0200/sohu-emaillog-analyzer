@@ -3,8 +3,8 @@
 
 --- 搜索结果 (主机: 10.18.88.48, 文件: /maildata/syslog/free_smtp/20251121.log) ---
 Nov 21 17:33:47 smtp19_36_240 postfix/cleanup[22734]: 4dCVQg6pJbz1y5s: message-id=<1763717627.756590b63cfe407a89eff267032a136a.benyzy@sohu.com>
-Nov 21 17:33:48 smtp19_36_240 postfix/qmgr[27315]: 4dCVQg6pJbz1y5s: from=<benyzy@sohu.com>, size=1084, nrcpt=1 (queue active)
-Nov 21 17:52:45 smtp19_36_240 postfix/smtp[23217]: 4dCVrY5Xc2z1xv3: to=<benyzy@sohu.com>, relay=mx301.mail.sohu.com[10.18.88.93]:25, delay=0.13, delays=0.1/0.01/0.01/0.01, dsn=2.0.0, status=sent (250 2.0.0 Ok: queued as D9C5A221ECA)
+Nov 21 17:33:48 smtp19_36_240 postfix/qmgr[27315]: 4dCVQg6pJbz1y5s: from=<webmaster@vip.sohu.com>, size=1084, nrcpt=1 (queue active)
+Nov 21 17:52:45 smtp19_36_240 postfix/smtp[23217]: 4dCVQg6pJbz1y5s: to=<benyzy@sohu.com>, relay=mx301.mail.sohu.com[10.18.88.93]:25, delay=0.13, delays=0.1/0.01/0.01/0.01, dsn=2.0.0, status=sent (250 2.0.0 Ok: queued as D9C5A221ECA)
 Nov 21 17:53:32 smtp19_36_251 postfix/cleanup[21517]: 4dCVsS0ZPgzHnZQ: message-id=<1763718811.9db321db6ea0452a8114f19ffbc5c228.benyzy@sohu.com>
 Nov 21 17:53:32 smtp19_36_251 postfix/qmgr[25698]: 4dCVsS0ZPgzHnZQ: from=<benyzy@sohu.com>, size=142178, nrcpt=1 (queue active)
 --- 发信过滤日志 ---

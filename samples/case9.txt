@@ -1,0 +1,14 @@
+✅ 日期格式正确：20251128
+--- 发信日志 ---
+
+--- 搜索结果 (主机: 10.18.88.48, 文件: /maildata/syslog/free_smtp/20251128.log) ---
+Nov 28 14:53:15 smtp19_36_252 postfix/cleanup[18605]: 4dHkXC3RyZz1y6F: message-id=<1764312795.c31216e0ccbe4c97bfde25c38e33cb0b.ruiyingchen@sohu.com>
+Nov 28 14:53:15 smtp19_36_252 postfix/qmgr[2216]: 4dHkXC3RyZz1y6F: from=<ruiyingchen@sohu.com>, size=1076567, nrcpt=1 (queue active)
+Nov 28 14:53:20 smtp19_36_252 postfix/smtp[17784]: 4dHkXC3RyZz1y6F: to=<JZLIN888@HOTMAIL.COM>, relay=hotmail-com.olc.protection.outlook.com[52.101.41.20]:25, delay=5.1, delays=0.26/0/0.84/4, dsn=2.6.0, status=sent (250 2.6.0 <1764312795.c31216e0ccbe4c97bfde25c38e33cb0b.ruiyingchen@sohu.com> [InternalId=65360812326563, Hostname=OS3PR01MB6724.jpnprd01.prod.outlook.com] 1086281 bytes in 1.194, 887.859 KB/sec Queued mail for delivery -> 250 2.1.5)
+--- 发信过滤日志 ---
+
+--- 搜索结果 (主机: 10.18.88.19, 文件: /maildata/syslog/FreeMailMilter/20251128.log) ---
+Nov 28 14:53:15 proxy_18_88_88 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 4895da6c40b944e589c2a75a94eab53b|8080|OnMailFrom|NORMAL|ruiyingchen@sohu.com|10.19.1.11
+Nov 28 14:53:15 proxy_18_88_88 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 4895da6c40b944e589c2a75a94eab53b|8080|OnEndHeaders|qid:4dHkXC3RyZz1y6F|cmdfrom:ruiyingchen@sohu.com|msgfrom:ruiyingchen <ruiyingchen@sohu.com>|rcpt:['jzlin888@hotmail.com']|vps_ip:10.19.1.11|subject:现金流量表2025.xlsx|vps_port:48754|msgsender:ruiyingchen@sohu.com
+Nov 28 14:53:15 proxy_18_88_88 free_milter_server.py[line: 221] FreeMailMilterSmtp INFO 4895da6c40b944e589c2a75a94eab53b|8080|OnEndBody|4dHkXC3RyZz1y6F|10.19.1.11|ruiyingchen@sohu.com|现金流量表2025.xlsx|ruiyingchen|0.010000|0.013370|
++ /usr/bin/python3 analyze_logs.py -l /tmp/a.log -s ruiyingchen@sohu.com -r JZLIN888@HOTMAIL.COM

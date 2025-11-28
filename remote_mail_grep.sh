@@ -7,16 +7,17 @@ set -o pipefail
 # 功能: 通过 SSH 连接到远程主机，在指定文件中查找一个邮件地址。
 # 使用方法: ./remote_mail_grep.sh <USERNAME> <HOSTNAME_OR_IP> <FILE_PATH>
 
-if [ "$#" -ne 2 ]; then
-    echo "使用错误：需要二个参数。"
-    echo "用法: $0 <EMAIL_ADDRESS> <LOG_DATE>"
-    echo "示例: $0 user@example.com 20251013"
+if [ "$#" -ne 3 ]; then
+    echo "使用错误：需要三个参数。"
+    echo "用法: $0 <SENDER_EMAIL> <RECIPIENT_EMAIL> <LOG_DATE>"
+    echo "示例: $0 sender@sohu.com other@domain.com 20251013"
     exit 1
 fi
 
 REMOTE_USER="${REMOTE_USER:-root}"
-EMAIL_ADDRESS="$1"
-SYSLOG_DATE="$2"
+SENDER_EMAIL="$1"
+RECIPIENT_EMAIL="$2"
+SYSLOG_DATE="$3"
 HOST_FREE="10.18.88.48"
 HOST_CORP="10.18.88.19"
 FILE_FREE_MX="/maildata/syslog/free_mx/${SYSLOG_DATE}.log"
@@ -24,8 +25,8 @@ FILE_FREE_SMTP="/maildata/syslog/free_smtp/${SYSLOG_DATE}.log"
 FILE_CORP_MX="/maildata/syslog/FreeMxMilter/${SYSLOG_DATE}.log"
 FILE_CORP_SMTP="/maildata/syslog/FreeMailMilter/${SYSLOG_DATE}.log"
 
-if [ -z "$EMAIL_ADDRESS" ]; then
-    echo "错误：邮件地址不能为空。"
+if [ -z "$SENDER_EMAIL" ] || [ -z "$RECIPIENT_EMAIL" ]; then
+    echo "错误：发件人和收件人邮件地址均不能为空。"
     exit 1
 fi
 
@@ -63,19 +64,29 @@ is_sohu_email() {
     fi
 }
 
+escape_regex() {
+    local value="$1"
+    # 转义正则元字符，避免误匹配
+    printf '%s' "$value" | sed -e 's/[].[\*^$(){}+?|\\]/\\&/g'
+}
+
+SENDER_REGEX="$(escape_regex "$SENDER_EMAIL")"
+RECIPIENT_REGEX="$(escape_regex "$RECIPIENT_EMAIL")"
+SEARCH_PATTERN="${SENDER_REGEX}|${RECIPIENT_REGEX}"
+
 execute_remote_grep() {
     local REMOTE_HOST="$1"
     local REMOTE_FILE="$2"
-    if [ -z "$REMOTE_USER" ] || [ -z "$EMAIL_ADDRESS" ]; then
-        echo "[FATAL] 内部错误：函数所需的全局变量 (REMOTE_USER 或 EMAIL_ADDRESS) 未定义。" >&2
+    if [ -z "$REMOTE_USER" ] || [ -z "$SEARCH_PATTERN" ]; then
+        echo "[FATAL] 内部错误：函数所需的全局变量 (REMOTE_USER 或 SEARCH_PATTERN) 未定义。" >&2
         return 1
     fi
     local SSH_COMMAND="
 if [ -f \"${REMOTE_FILE}\" ]; then
   echo \"--- 搜索结果 (主机: ${REMOTE_HOST}, 文件: ${REMOTE_FILE}) ---\"
-  grep -i -F \"${EMAIL_ADDRESS}\" \"${REMOTE_FILE}\"
+  grep -i -E \"${SEARCH_PATTERN}\" \"${REMOTE_FILE}\"
   if [ \$? -ne 0 ]; then
-    echo \"[INFO]无相关记录，联系发件地址管理员确认: ${EMAIL_ADDRESS}\"
+    echo \"[INFO]无相关记录，检查发件人/收件人: ${SENDER_EMAIL} 或 ${RECIPIENT_EMAIL}\"
   fi
 else
   echo \"[ERROR] 日志文件不存在，检查日期是否写错: ${REMOTE_FILE}\"
@@ -91,14 +102,14 @@ validate_date "$SYSLOG_DATE"
 STATUS=0
 
 # 根据邮件地址域名决定查询哪些日志
-if is_sohu_email "$EMAIL_ADDRESS"; then
-    # 如果是 sohu.com 或 vip.sohu.com，只查询发信相关日志
+if is_sohu_email "$SENDER_EMAIL"; then
+    # 如果发件人属于 sohu.com 域，只查询发信相关日志
     echo "--- 发信日志 ---"
     execute_remote_grep  "${HOST_FREE}" "${FILE_FREE_SMTP}" || STATUS=1
     echo "--- 发信过滤日志 ---"
     execute_remote_grep  "${HOST_CORP}" "${FILE_CORP_SMTP}" || STATUS=1
-else
-    # 否则，只查询收信相关日志
+elif is_sohu_email "$RECIPIENT_EMAIL"; then
+    # 如果收件人属于 sohu.com 域，只查询收信相关日志
     echo "--- 收信日志 ---"
     execute_remote_grep  "${HOST_FREE}" "${FILE_FREE_MX}" || STATUS=1
     echo "--- 收信过滤日志 ---"
