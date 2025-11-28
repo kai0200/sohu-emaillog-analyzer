@@ -1,8 +1,6 @@
 """
 Check registry and helpers for log analysis.
 """
-from __future__ import annotations
-
 from typing import Callable, Iterable, List, Optional, Tuple
 
 from .helo_error import run as check_helo_error

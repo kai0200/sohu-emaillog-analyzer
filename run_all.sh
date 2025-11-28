@@ -14,7 +14,6 @@ echo
 echo ================================================================================================
 echo 250送达：
 python3 analyze_logs.py --log samples/case2.txt --sender acxzy@sohu.com --recipient Ylinda@vtb.ru      
-python3 analyze_logs.py --log samples/case6.txt --sender lu_184@sohu.com --recipient gscc@substack.com 
 echo
 echo ================================================================================================
 echo 测试log无250，但是有过滤日志，认为邮件发送可能成功

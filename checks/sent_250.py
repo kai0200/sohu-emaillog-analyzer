@@ -1,6 +1,6 @@
 import re
 from collections import defaultdict
-from typing import Dict
+from typing import Dict, List, Optional
 
 def extract_time(line: str) -> str:
     m = re.match(r"^[A-Za-z]{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}", line)
@@ -76,6 +76,73 @@ def determine_delivery_state(messages) -> str:
             return "成功"
     return "失败"
 
+MONTH_MAP = {
+    "Jan": "1",
+    "Feb": "2",
+    "Mar": "3",
+    "Apr": "4",
+    "May": "5",
+    "Jun": "6",
+    "Jul": "7",
+    "Aug": "8",
+    "Sep": "9",
+    "Oct": "10",
+    "Nov": "11",
+    "Dec": "12",
+}
+
+
+def convert_to_chinese_time(time_str: str) -> str:
+    if not time_str:
+        return ""
+    parts = time_str.split()
+    if len(parts) < 3:
+        return time_str
+    month_en, day, time_part = parts[0], parts[1], parts[2]
+    month_cn = MONTH_MAP.get(month_en, month_en)
+    return f"{month_cn}月{day}日 {time_part}"
+
+
+def extract_msgsender_field(line: str) -> str:
+    m = re.search(r"msgsender:([^|]+)", line, flags=re.IGNORECASE)
+    return m.group(1).strip() if m else ""
+
+
+def extract_rcpt_field(line: str) -> str:
+    m = re.search(r"rcpt:(\[[^\]]+\])", line, flags=re.IGNORECASE)
+    return m.group(1).strip() if m else ""
+
+
+def extract_subject_field(line: str) -> str:
+    m = re.search(r"subject:([^|]+)", line, flags=re.IGNORECASE)
+    return m.group(1).strip() if m else ""
+
+
+def rcpt_contains(rcpt_raw: str, recipient: str) -> bool:
+    if not rcpt_raw or not recipient:
+        return False
+    rcpt_lower = rcpt_raw.lower()
+    recipient_lower = recipient.lower()
+    return recipient_lower in rcpt_lower
+
+
+def print_filter_table(rows: List[Dict[str, str]]) -> None:
+    if not rows:
+        return
+    print("\n邮件信息表格:")
+    print("时间 | QID | 发件人信息 | 收件人信息 | 主题")
+    print("-" * 100)
+    for row in rows:
+        print(f"{row['time_cn']} | {row['qid']} | {row['msgsender']} | {row['rcpt']} | {row['subject']}")
+
+
+def print_filter_summary(info: Dict[str, str], recipient: str) -> None:
+    status_hint = "成功（基于过滤日志判断）查看用户目录，或联系收件人确认"
+    print(f"发信时间：{info.get('time_en', '')}")
+    print(f"发件人：{info.get('msgsender', '')}")
+    print(f"收件人：{recipient}")
+    print(f"status：{status_hint}")
+
 def run(text: str, sender: str, recipient: str) -> bool:
     lines = text.splitlines()
     s = sender.lower()
@@ -88,6 +155,8 @@ def run(text: str, sender: str, recipient: str) -> bool:
     global_has_recipient = False
     global_status_segment = ""
     first_relevant_line = ""
+    filter_rows: List[Dict[str, str]] = []
+    filter_summary_info: Optional[Dict[str, str]] = None
 
     for line in lines:
         stripped = line.strip()
@@ -135,6 +204,24 @@ def run(text: str, sender: str, recipient: str) -> bool:
                     global_has_recipient = True
                     if not first_relevant_line:
                         first_relevant_line = stripped
+            if "free_milter_server.py" in lower and "onendheaders" in lower:
+                time_en = extract_time(stripped)
+                time_cn = convert_to_chinese_time(time_en)
+                msgsender = extract_msgsender_field(stripped)
+                rcpt_field = extract_rcpt_field(stripped)
+                subject = extract_subject_field(stripped) or "(空)"
+                if time_cn and filter_qid and msgsender and rcpt_field:
+                    if sender_matches(msgsender, sender) and rcpt_contains(rcpt_field, recipient):
+                        filter_row = {
+                            "time_cn": time_cn,
+                            "time_en": time_en,
+                            "qid": filter_qid,
+                            "msgsender": msgsender,
+                            "rcpt": rcpt_field,
+                            "subject": subject,
+                        }
+                        filter_rows.append(filter_row)
+                        filter_summary_info = filter_row
             # continue to next line after handling filter qid case
             continue
 
@@ -195,6 +282,12 @@ def run(text: str, sender: str, recipient: str) -> bool:
             print("")
             printed = True
     if printed:
+        print_filter_table(filter_rows)
+        return True
+
+    if filter_summary_info:
+        print_filter_summary(filter_summary_info, recipient)
+        print_filter_table(filter_rows)
         return True
 
     # Fallback: if sender and recipient are both observed in logs (even without QID/status)
@@ -216,6 +309,11 @@ def run(text: str, sender: str, recipient: str) -> bool:
         if status_message:
             print(f"说明： {status_message}")
         print(f"收发状态：{delivery_state}")
+        print_filter_table(filter_rows)
+        return True
+
+    if filter_rows:
+        print_filter_table(filter_rows)
         return True
 
     return False
